@@ -90,7 +90,9 @@ const vendedoraDelMes = (mes, anio)=>{
 
   let precios = {vendedora: '', precio: 0}
 
-  vendedoras.map(v=> v.componentes.length ? precioMaquina(v.componentes)> precios.precio ? precios= {vendedora:v.vendedora, precio:precioMaquina(v.componentes) } : 0:0)
+  vendedoras.map(v=> v.componentes.length ? precioMaquina(v.componentes)> precios.precio ? 
+  precios= {vendedora:v.vendedora, precio:precioMaquina(v.componentes) } 
+  : 0:0)
 
   return precios.vendedora
 }
@@ -123,38 +125,19 @@ console.log('\n')
 
 // //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
-// function reducir(arrayUno, arrayDos){
+const ventasVendedora = (nombre) => {
 
-//   arrayUno.map(function(cadaVenta){
+const venta= []
 
-//     cadaVenta.map(function(cadaComponente){
+  local.ventas.map(v=> v.nombreVendedora === nombre ? venta.push(...v.componentes): '')
 
-//       arrayDos.push(cadaComponente)
-//     })
-//   })
-//   return precioMaquina (arrayDos)
-// }
+  return precioMaquina(venta)
+}
 
-
-// function ventasVendedora(nombre){
-
-//   var venta = [];
-//   var componentesASumar = [];
-
-//   local.ventas.map(function(cadaVenta){
-
-//     if(cadaVenta.nombreVendedora === nombre){
-
-//       venta.push(cadaVenta.componentes);
-
-//     }
-//   })
-
-// return reducir(venta, componentesASumar)
-// }
-// console.log( ventasVendedora("Grace") ); // 900
-// console.log( ventasVendedora("Ada") ); // 670
-// console.log('\n')
+console.log('ventaVendedora');
+console.log( ventasVendedora("Grace") ); // 900
+console.log( ventasVendedora("Ada") ); // 670
+console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
