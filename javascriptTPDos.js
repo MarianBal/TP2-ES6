@@ -38,25 +38,21 @@ var local = {
 const precioMaquina = array=>{
   const sumar = [];
 
-  array.length ? (array.map(a=>local.precios.map(p=>a === p.componente ? sumar.push(p.precio): null)))
-  : null;
+  array.length ? (array.map(a=>local.precios.map(p=>a === p.componente ? sumar.push(p.precio): null))): 0;
   return sumar.reduce((total, suma)=> total + suma)
 }
-
-console.log('PrecioMaquina')
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 console.log(precioMaquina(["Monitor ASC 543", "Motherboard MZI"]))
 console.log(precioMaquina(["Monitor ASC 543", "Motherboard ASUS 1200"]))
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1200"]))
-
 console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
 //cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que
-//formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada
-//por la variable ventas.
+//formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
+
 
 const cantidadVentasComponente = componente =>{
   let i = 0
@@ -64,7 +60,6 @@ const cantidadVentasComponente = componente =>{
   return i;
 }
 
-console.log('cantidadVentasComponente');
 console.log( cantidadVentasComponente("Monitor GPRS 3000") ); // 3
 console.log( cantidadVentasComponente("Motherboard ASUS 1500") );//2
 console.log( cantidadVentasComponente("Monitor ASC 543") );
@@ -78,7 +73,38 @@ console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
-// //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
+// //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre
+//de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total
+//de las ventas. El importe de una venta es el que indica la función precioMaquina.
+
+const vendedoraDelMes = (mes, anio)=>{
+
+  const vendedoras = [];
+
+  local.vendedoras.map(v=>vendedoras.push({vendedora:v, componentes:[], precio:0}))
+
+  local.ventas.map(v => (v.fecha.getMonth() === mes-1 && v.fecha.getFullYear()) === anio ?
+
+  (vendedoras.map(ven=>ven.vendedora === v.nombreVendedora ? ven.componentes.push(...v.componentes): ''))
+  :null)
+
+  let precios = {vendedora: '', precio: 0}
+
+  vendedoras.map(v=> v.componentes.length ? precioMaquina(v.componentes)> precios.precio ? precios= {vendedora:v.vendedora, precio:precioMaquina(v.componentes) } : 0:0)
+
+  return precios.vendedora
+}
+
+console.log('vendedoraDelMes')
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+console.log(vendedoraDelMes(2, 2019));
+console.log('\n')
+
+// //---------------------------------------------------------------------------------------------------------------------------
+
+//vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más
+//vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que
+//indica la función precioMaquina.
 
 // function vendedoraDelMes(mes,anio){
 
@@ -136,9 +162,9 @@ console.log('\n')
 // console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 // console.log(vendedoraDelMes(2, 2019));
 // console.log('\n')
-// //---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
 
-// //ventasMes(mes, anio): Obtener las ventas de un mes.
+//ventasMes(mes, anio): Obtener las ventas de un mes.
 
 // function ventasMes(mes,anio){
 
