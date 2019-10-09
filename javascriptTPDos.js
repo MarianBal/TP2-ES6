@@ -165,26 +165,20 @@ console.log('\n')
 
 // //huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
 
-// function huboVentas(mes,anio){
+const huboVentas = (mes, anio) =>{
 
-// var ventas = false;
+  let ventas = false;
 
-//   local.ventas.map(function(cadaVenta){
+  local.ventas.map(v => (v.fecha.getMonth() === mes-1 && v.fecha.getFullYear() === anio ? ventas = true : '' ))
 
-//     if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+  return ventas;
+}
 
-//     ventas = true;
-
-//     }
-
-//   })
-//   return ventas
-// }
-
-// console.log( huboVentas(3, 2019) ); // false
-// console.log( huboVentas(1, 2019) ); // true
-// console.log( huboVentas(2, 2019) ); // true
-// console.log('\n')
+console.log('huboVentas')
+console.log( huboVentas(3, 2019) ); // false
+console.log( huboVentas(1, 2019) ); // true
+console.log( huboVentas(2, 2019) ); // true
+console.log('\n')
 
 
 // //---------------------------------------------------------------------------------------------------------------------------
