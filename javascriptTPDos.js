@@ -250,25 +250,6 @@ const ventasSucursal = sucursal =>{
   return precioMaquina(ventas)
 }
 
-
-
-// function ventasSucursal(sucursal){
-
-//   var venta = [];
-//   var componentesASumar = [];
-
-//   local.ventas.map(function(cadaVenta){
-
-//     if(cadaVenta.sucursal === sucursal){
-
-//       venta.push(cadaVenta.componentes)
-//     }
-//   })
-
-//   return reducir(venta, componentesASumar)
-
-// }
-
 console.log('ventasSucursal')
 console.log( ventasSucursal("Centro") ); // 4195
 console.log( ventasSucursal("Caballito") ); //
@@ -277,7 +258,7 @@ console.log('\n')
 // //Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una
 // //propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
-// //Resuelto más arriba
+// I don't know
 
 
 // //---------------------------------------------------------------------------------------------------------------------------
@@ -285,58 +266,28 @@ console.log('\n')
 // //Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes.
 // //No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
-// function sucursalDelMes(mes, anio){
+const sucursalDelMes = (mes, anio)=>{
 
-//   var sucursales = [];
+  const sucursal = [];
 
-//   for(var i=0; i<local.sucursales.length; i++){
+  local.sucursales.map(v=>sucursal.push({sucursal:v, componentes:[], precio:0}))
 
-//     sucursales[i]={nombre: local.sucursales[i], componentes: [] }
-// }
+  local.ventas.map(v => (v.fecha.getMonth() === mes-1 && v.fecha.getFullYear()) === anio ?
 
-//   for(var i=0; i<local.ventas.length; i++){
+  (sucursal.map(s=>s.sucursal === v.sucursal ? s.componentes.push(...v.componentes): '')):null)
 
-//     if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
+  let precios = {sucursal: '', precio: 0}
 
-//       for(var j=0; j<sucursales.length; j++){
+  sucursal.map(s=> s.componentes.length ? precioMaquina(s.componentes)> precios.precio ? 
+  precios= {sucursal:s.sucursal, precio:precioMaquina(s.componentes) } : 0:0)
 
-//         if(local.ventas[i].sucursal === sucursales[j].nombre){
+  return precios.sucursal
+}
 
-//           for(var k =0; k<local.ventas[i].componentes.length; k++){
-
-//             sucursales[j].componentes.push(local.ventas[i].componentes[k])
-//           }
-//         }
-//       }
-//     }
-
-//   }
-// sucursales.map(function(cadaSucursal){
-
-//   cadaSucursal.componentes = precioMaquina(cadaSucursal.componentes);
-// })
-
-// var valorMaximo = 0;
-
-// var sucursalMasVentas = '';
-
-//   for(var i=0; i < sucursales.length; i++){
-
-//       if(valorMaximo < sucursales[i].componentes){
-
-//           valorMaximo = sucursales[i].componentes;
-
-//           sucursalMasVentas = sucursales[i].nombre;
-//       }
-//   }
-
-//   return sucursalMasVentas
-// }
-
-
-// console.log( sucursalDelMes(1, 2019) ); // "Centro"
-// console.log( sucursalDelMes(2, 2019) );
-// console.log('\n')
+console.log('sucursalDelMes')
+console.log( sucursalDelMes(1, 2019) ); // "Centro"
+console.log( sucursalDelMes(2, 2019) );
+console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
