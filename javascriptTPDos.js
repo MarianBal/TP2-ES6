@@ -125,7 +125,7 @@ console.log('\n')
 
 // //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
-const ventasVendedora = (nombre) => {
+const ventasVendedora = nombre => {
 
 const venta= []
 
@@ -141,46 +141,25 @@ console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
-// //componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
+// //componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es 
+//el que indica la función cantidadVentasComponente
 
-// function componenteMasVendido(){
+const componenteMasVendido = () =>{
 
-//   var compo = [];
+  const compo = [];
 
-//   for(var i =0; i<local.precios.length; i++){
+  local.precios.map(p=> compo.push({compo:p.componente, ventas:cantidadVentasComponente(p.componente)}) )
 
-//       compo[i] = {componente: local.precios[i].componente, contador:0}
+  let masVendido = {ventas:0}
 
-//   }
+  compo.map(c=>c.ventas> masVendido.ventas ? masVendido = {...c}: '' )
 
-//   for(var i = 0; i< local.ventas.length; i++){
+  return masVendido.compo;
+}
 
-//       for(var j=0; j<compo.length; j++){
-
-//           if(local.ventas[i].componentes[j] === compo[j].componente){
-
-//               compo[j].contador ++
-//           }
-//       }
-//   }
-
-//   var valorMaximo = 0;
-//   var componenteMasVendido = '';
-
-//   for(var i=0; i< compo.length; i++){
-
-//       if(valorMaximo < compo[i].contador){
-
-//           valorMaximo = compo[i].contador;
-//           componenteMasVendido = compo[i].componente
-//       }
-//   }
-
-//   return componenteMasVendido
-// }
-
-// console.log( componenteMasVendido()); // Monitor GPRS 3000
-// console.log('\n')
+console.log('componenteMasVendido')
+console.log( componenteMasVendido()); // Monitor GPRS 3000
+console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
