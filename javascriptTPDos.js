@@ -102,92 +102,22 @@ console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
-//vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más
-//vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que
-//indica la función precioMaquina.
-
-// function vendedoraDelMes(mes,anio){
-
-//   var ventasVendedora = [];
-
-//   for(var i=0; i<local.vendedoras.length; i++){
-//       ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
-//   }
-
-//   for(var i=0; i<local.ventas.length; i++){
-
-//       if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
-
-//           for(j=0; j<ventasVendedora.length; j++){
-
-//               if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
-
-//                   ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
-//               }
-//           }
-
-//       }
-//   }
-
-//   for(var i=0; i<ventasVendedora.length; i++){
-
-//     if(ventasVendedora[i].componentes.length){
-
-//           ventasVendedora[i].componentes = ventasVendedora[i].componentes.reduce(function(total,suma){
-//             return total + suma
-
-//       })
-
-//     }
-
-//   }
-
-//   var valorMaximo = 0;
-//   var vendedora ='';
-
-//   for(var i=0; i<ventasVendedora.length; i++){
-
-//     if(valorMaximo< ventasVendedora[i].componentes){
-
-//       valorMaximo = ventasVendedora[i].componentes;
-
-//       vendedora = ventasVendedora[i].nombre;
-
-//     }
-//   }
-// return vendedora
-
-// }
-
-// console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-// console.log(vendedoraDelMes(2, 2019));
-// console.log('\n')
-//---------------------------------------------------------------------------------------------------------------------------
 
 //ventasMes(mes, anio): Obtener las ventas de un mes.
 
-// function ventasMes(mes,anio){
+const ventasMes = (mes, anio) =>{
 
-//   var componentesVendidos =[];
+  const componentesVendidos = [];
 
+  local.ventas.map(v=>(v.fecha.getMonth() === mes-1 && v.fecha.getFullYear()) === anio ? componentesVendidos.push(...v.componentes):'')
 
-//   local.ventas.map(function(cadaVenta){
+  return precioMaquina(componentesVendidos)
+}
 
-//     if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
-
-//       cadaVenta.componentes.map(function(cadaComponente){
-
-//         componentesVendidos.push(cadaComponente)
-//       })
-//   }
-//   })
-
-//   return precioMaquina(componentesVendidos)
-// }
-
-// console.log( ventasMes(1, 2019) ); // 1250
-// console.log( ventasMes(2, 2019) ); // 320
-// console.log('\n')
+console.log('ventasMes')
+console.log( ventasMes(1, 2019) ); // 1250
+console.log( ventasMes(2, 2019) ); // 320
+console.log('\n')
 
 // //---------------------------------------------------------------------------------------------------------------------------
 
